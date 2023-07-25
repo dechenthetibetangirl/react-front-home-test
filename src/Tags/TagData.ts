@@ -60,6 +60,28 @@ export const winter: TagType = {
   color: "blue",
 };
 
+// New tags 
+
+export const glutenFree: TagType = {
+  id: "gluten-free",
+  name: {
+    fr: "sans gluten",
+    en: "gluten-free",
+  },
+  type: "diet",
+  color: "#bada55",
+};
+
+export const quickAndEasy: TagType = {
+  id: "quick-easy",
+  name: {
+    fr: "rapide et facile",
+    en: "quick & easy",
+  },
+  type: "difficulty",
+  color: "#ff9900",
+};
+
 export const tagList: TagType[] = [
   summer,
   winter,
@@ -67,4 +89,9 @@ export const tagList: TagType[] = [
   appetizer,
   autumn,
   vegan,
+  glutenFree, // Added the new tag to the tagList
+  quickAndEasy, // Added the new tag to the tagList
 ];
+
+
+

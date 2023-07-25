@@ -29,6 +29,8 @@ import {
   summer,
   vegan,
   winter,
+  glutenFree,
+  quickAndEasy
 } from "../Tags/TagData";
 
 const pavlova: RecipeType = {
@@ -97,7 +99,7 @@ const waldorfSalad: RecipeType = {
   ],
   tags: [appetizer, summer, vegan],
 };
-
+//New recipe
 const redFruitTart: RecipeType = {
   nom: "Tarte aux Fruits Rouges",
   description: "Une délicieuse tarte aux fruits rouges, parfaite pour les desserts d'été.",
@@ -108,7 +110,7 @@ const redFruitTart: RecipeType = {
     { ingredient: butter, quantity: 100, unit: "g" },
     { ingredient: redFruits, quantity: 300, unit: "g" },
   ],
-  tags: [dessert, summer],
+  tags: [dessert, summer, glutenFree, quickAndEasy],
 };
 export const allRecipes: ListOfRecipes = [
   pavlova,
@@ -170,4 +172,14 @@ export const autumnRecipes: RecipeType[] = allRecipes.filter((recette) => {
 export const veganRecipes: RecipeType[] = allRecipes.filter((recette) => {
   const tagIds: string[] = recette.tags.map((tag) => tag.id);
   return tagIds.includes("vegan");
+});
+//New tags RecipeType
+export const glutenFreeRecipes: RecipeType[] = allRecipes.filter((recipe) => {
+  const tagIds: string[] = recipe.tags.map((tag) => tag.id);
+  return tagIds.includes("gluten-free");
+});
+
+export const quickAndEasyRecipes: RecipeType[] = allRecipes.filter((recipe) => {
+  const tagIds: string[] = recipe.tags.map((tag) => tag.id);
+  return tagIds.includes("quick-easy");
 });
