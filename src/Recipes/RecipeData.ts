@@ -98,11 +98,24 @@ const waldorfSalad: RecipeType = {
   tags: [appetizer, summer, vegan],
 };
 
+const redFruitTart: RecipeType = {
+  nom: "Tarte aux Fruits Rouges",
+  description: "Une délicieuse tarte aux fruits rouges, parfaite pour les desserts d'été.",
+  imageURL: "https://example.com/red-fruit-tart-image.jpg",
+  ingredients: [sugar, butter,redFruits],
+  ingredientsWithQuantity: [
+    { ingredient: sugar, quantity: 150, unit: "g" },
+    { ingredient: butter, quantity: 100, unit: "g" },
+    { ingredient: redFruits, quantity: 300, unit: "g" },
+  ],
+  tags: [dessert, summer],
+};
 export const allRecipes: ListOfRecipes = [
   pavlova,
   fondantChocolat,
   pearPie,
   waldorfSalad,
+  redFruitTart,
 ];
 
 export const summerRecipes = allRecipes.filter((recipe) => {
