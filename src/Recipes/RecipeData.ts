@@ -96,7 +96,7 @@ const waldorfSalad: RecipeType = {
     },
     { ingredient: feta, quantity: 150, unit: "g" },
   ],
-  tags: [appetizer, summer, vegan],
+  tags: [appetizer, summer, vegan, quickAndEasy],
 };
 //New recipe
 const redFruitTart: RecipeType = {
