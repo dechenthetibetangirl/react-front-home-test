@@ -63,20 +63,20 @@ export const winter: TagType = {
 // New tags 
 
 export const glutenFree: TagType = {
-  id: "gluten-free",
+  id: "glutenFree",
   name: {
     fr: "sans gluten",
-    en: "gluten-free",
+    en: "glutenFree",
   },
   type: "diet",
   color: "#bada55",
 };
 
 export const quickAndEasy: TagType = {
-  id: "quick-easy",
+  id: "quickAndEasy",
   name: {
     fr: "rapide et facile",
-    en: "quick & easy",
+    en: "quickAndEasy",
   },
   type: "difficulty",
   color: "#ff9900",

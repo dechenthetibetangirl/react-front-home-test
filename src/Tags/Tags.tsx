@@ -1,7 +1,7 @@
 import { Tag } from "./Tag";
 import { TagType } from "./TagType";
 
-export const Tags = ({ tags }: { tags: TagType[] }) => {
+export const Tags = ({ tags, handleTagClick }: { tags: TagType[]; handleTagClick: (tagId: string) => void; }) => {
   return (
     <div
       style={{
@@ -14,7 +14,7 @@ export const Tags = ({ tags }: { tags: TagType[] }) => {
       }}
     >
       {tags.map((obj) => (
-        <Tag tag={obj} />
+        <Tag tag={obj} handleTagClick={handleTagClick} />
       ))}
     </div>
   );

@@ -173,12 +173,24 @@ export const veganRecipes: RecipeType[] = allRecipes.filter((recette) => {
   return tagIds.includes("vegan");
 });
 //New tags RecipeType
-export const glutenFreeRecipes: RecipeType[] = allRecipes.filter((recipe) => {
-  const tagIds: string[] = recipe.tags.map((tag) => tag.id);
-  return tagIds.includes("gluten-free");
+export const glutenFreeRecipes: RecipeType[] = allRecipes.filter((recette) => {
+  const tagIds: string[] = recette.tags.map((tag) => tag.id);
+  return tagIds.includes("glutenFree");
 });
 
-export const quickAndEasyRecipes: RecipeType[] = allRecipes.filter((recipe) => {
-  const tagIds: string[] = recipe.tags.map((tag) => tag.id);
-  return tagIds.includes("quick-easy");
+export const quickAndEasyRecipes: RecipeType[] = allRecipes.filter((recette) => {
+  const tagIds: string[] = recette.tags.map((tag) => tag.id);
+  return tagIds.includes("quickAndEasy");
+});
+
+//Added the respective missing recipes for two tags
+
+export const winterRecipes: RecipeType[] = allRecipes.filter((recette) => {
+  const tagIds: string[] = recette.tags.map((tag) => tag.id);
+  return tagIds.includes("winter");
+});
+
+export const appetizerRecipes: RecipeType[] = allRecipes.filter((recette) => {
+  const tagIds: string[] = recette.tags.map((tag) => tag.id);
+  return tagIds.includes("appetizer");
 });

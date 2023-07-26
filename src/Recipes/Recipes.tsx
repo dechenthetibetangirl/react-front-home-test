@@ -1,7 +1,7 @@
 import { ListOfRecipes } from "./RecipeType";
 import Recipe from "./Recipe";
 
-export const Recipes = ({ recipes }: { recipes: ListOfRecipes }) => {
+export const Recipes = ({ recipes, handleTagClick }: { recipes: ListOfRecipes; handleTagClick: (tagId: string) => void; }) => { // Receive handleTagClick as a prop
   return (
     <div
       style={{
@@ -20,8 +20,8 @@ export const Recipes = ({ recipes }: { recipes: ListOfRecipes }) => {
         }}
       >
         {recipes.map((obj) => (
-          <Recipe recipe={obj} />
-        ))}
+          <Recipe recipe={obj} handleTagClick={handleTagClick} /> 
+          ))}
       </div>
     </div>
   );
