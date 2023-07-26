@@ -4,8 +4,10 @@ import Recipes from "./Recipes/Recipes";
 import { allRecipes, /* other recipe data imports */ } from "./Recipes/RecipeData";
 import { TagList } from "./Tagfilter/ListeDesTags";
 import { tagList } from "./Tags/TagData";
-import { FaTimes } from "react-icons/fa";
 import { TagType } from "./Tags/TagType";
+import { Box, Button, Flex, Heading } from '@chakra-ui/react';
+import { FaTimes } from "react-icons/fa";
+
 
 export default function App() {
   // New state to keep track of the selected tags
@@ -35,43 +37,44 @@ export default function App() {
   };
 
   return (
-    <div className="App">
-      <div>
-        <h2>Selected Tags:</h2>
-        <div style={{ display: "flex" }}>
+    <Box className="App">
+      <Box>
+        <Heading size="md">Selected Tags:</Heading>
+        <Flex>
           {selectedTags.map((tagId) => (
-            <div
+            <Box
               key={tagId}
-              style={{
-                margin: "5px",
-                padding: "5px",
-                borderRadius: "3px",
-                backgroundColor: "blue",
-                color: "white",
-              }}
+              margin="5px"
+              padding="5px"
+              borderRadius="3px"
+              backgroundColor="blue"
+              color="white"
               onClick={() => handleRemoveTag(tagId)}
+              display="flex"
+              alignItems="center"
+              cursor="pointer"
             >
               {tagList.find((tag) => tag.id === tagId)?.name.en}
               <FaTimes style={{ marginLeft: "5px" }} />
-            </div>
+            </Box>
           ))}
-        </div>
-      </div>
-      <div>
-        <h2>Filter Recipes:</h2>
+        </Flex>
+      </Box>
+      <Box>
+        <Heading size="md">Filter Recipes:</Heading>
         <TagList tags={tagList} selectedTags={selectedTags} handleTagClick={handleTagClick} />
-        <button onClick={() => handleTagClick("chocolate")}>Chocolat</button>
-        <button onClick={() => handleTagClick("sugar")}>Sucre</button>
-        <button onClick={() => handleTagClick("summer")}>Eté</button>
-        <button onClick={() => handleTagClick("dessert")}>Dessert</button>
-        <button onClick={() => handleTagClick("chocolate dessert")}>
+        <Button onClick={() => handleTagClick("chocolate")}>Chocolat</Button>
+        <Button onClick={() => handleTagClick("sugar")}>Sucre</Button>
+        <Button onClick={() => handleTagClick("summer")}>Eté</Button>
+        <Button onClick={() => handleTagClick("dessert")}>Dessert</Button>
+        <Button onClick={() => handleTagClick("chocolate dessert")}>
           dessert chocolat
-        </button>
-        <button onClick={() => handleTagClick("eggs free")}>Sans Oeufs</button>
-        <button onClick={() => handleTagClick("autumn")}> Autumn</button>
-        <button onClick={() => handleTagClick("vegan")}> Vegan</button>
-      </div>
+        </Button>
+        <Button onClick={() => handleTagClick("eggs free")}>Sans Oeufs</Button>
+        <Button onClick={() => handleTagClick("autumn")}>Autumn</Button>
+        <Button onClick={() => handleTagClick("vegan")}>Vegan</Button>
+      </Box>
       <Recipes recipes={filteredRecipes()} handleTagClick={handleTagClick} />
-    </div>
+    </Box>
   );
 }
