@@ -3,12 +3,13 @@ import { TagType } from "./TagType";
 
 export const Tag = ({
   tag,
+  isSelected,
   handleTagClick,
 }: {
   tag: TagType;
-  handleTagClick: (tagId: string) => void;
+  isSelected: boolean; // Add the isSelected prop to the type definition
+  handleTagClick: (tag: TagType | string) => void;
 }) => {
-
   return (
     <div
       style={{
@@ -20,9 +21,9 @@ export const Tag = ({
         justifyContent: "center",
         backgroundColor: `${tag.color}`,
         cursor: "pointer",
+        border: isSelected ? "2px solid red" : "none", // Apply a border if the tag is selected
       }}
-      // Call handleTagClick when the tag is clicked
-      onClick={() => handleTagClick(tag.id)}
+      onClick={() => handleTagClick(tag)}
     >
       {tag.name.fr}
     </div>

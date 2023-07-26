@@ -1,64 +1,36 @@
 import { useState } from "react";
 import "./styles.css";
 import Recipes from "./Recipes/Recipes";
-import { allRecipes, sugarRecipes, summerRecipes, dessertRecipes, noEggsRecipes, chocolateRecipes, autumnRecipes, veganRecipes, chocolateDessertRecipes, glutenFreeRecipes, quickAndEasyRecipes, winterRecipes, appetizerRecipes } from "./Recipes/RecipeData";
+import { allRecipes, /* other recipe data imports */ } from "./Recipes/RecipeData";
 import { TagList } from "./Tagfilter/ListeDesTags";
 import { tagList } from "./Tags/TagData";
-import { FaTimes } from "react-icons/fa"; 
+import { FaTimes } from "react-icons/fa";
+import { TagType } from "./Tags/TagType";
 
 export default function App() {
-  const [filter, setFilter] = useState<string>("all");
-  
-  // New state to keep track of the selected tag
-  const [selectedTag, setSelectedTag] = useState<string>("");
+  // New state to keep track of the selected tags
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  // Function to handle tag click and filter recipes
-  const handleTagClick = (tagId: string) => {
-    if (tagId === selectedTag) {
-      // If the same tag is clicked again, reset the filter
-      setSelectedTag("");
-      setFilter("all");
+  const handleTagClick = (tag: TagType | string) => {
+    const tagId = typeof tag === "string" ? tag : tag.id;
+    if (selectedTags.includes(tagId)) {
+      setSelectedTags((prevTags) => prevTags.filter((selectedTag) => selectedTag !== tagId));
     } else {
-      setSelectedTag(tagId);
-      setFilter(tagId); // Set the filter to the selected tagId
+      setSelectedTags((prevTags) => [...prevTags, tagId]);
     }
   };
 
-  
-  const handleRemoveTag = () => {
-    setSelectedTag("");
-    setFilter("all");
+  const handleRemoveTag = (tagId: string) => {
+    setSelectedTags((prevTags) => prevTags.filter((selectedTag) => selectedTag !== tagId));
   };
 
-  // Filter recipes based on the selected tag
   const filteredRecipes = () => {
-    switch (selectedTag) {
-      case "chocolate":
-        return chocolateRecipes;
-      case "sugar":
-        return sugarRecipes;
-      case "summer":
-        return summerRecipes;
-      case "dessert":
-        return dessertRecipes;
-      case "chocolate dessert":
-        return chocolateDessertRecipes;
-      case "eggs free":
-        return noEggsRecipes;
-      case "autumn":
-        return autumnRecipes;
-      case "vegan":
-        return veganRecipes;
-        case "glutenFree": 
-        return glutenFreeRecipes;
-      case "quickAndEasy": 
-        return quickAndEasyRecipes;
-        case "winter": 
-        return winterRecipes;
-        case "appetizer": 
-        return appetizerRecipes;
-      default:
-        return allRecipes;
+    if (selectedTags.length === 0) {
+      return allRecipes; // If no tags selected, show all recipes
+    } else {
+      return allRecipes.filter((recipe) =>
+        selectedTags.every((tagId) => recipe.tags.map((tag) => tag.id).includes(tagId))
+      );
     }
   };
 
@@ -67,8 +39,9 @@ export default function App() {
       <div>
         <h2>Selected Tags:</h2>
         <div style={{ display: "flex" }}>
-          {selectedTag && (
+          {selectedTags.map((tagId) => (
             <div
+              key={tagId}
               style={{
                 margin: "5px",
                 padding: "5px",
@@ -76,28 +49,27 @@ export default function App() {
                 backgroundColor: "blue",
                 color: "white",
               }}
-              onClick={handleRemoveTag} // Add onClick to handle tag removal
-
+              onClick={() => handleRemoveTag(tagId)}
             >
-              {selectedTag}
-              <FaTimes style={{ marginLeft: "5px" }} /> 
+              {tagList.find((tag) => tag.id === tagId)?.name.en}
+              <FaTimes style={{ marginLeft: "5px" }} />
             </div>
-          )}
+          ))}
         </div>
       </div>
       <div>
         <h2>Filter Recipes:</h2>
-        <TagList tags={tagList} handleTagClick={handleTagClick} />
+        <TagList tags={tagList} selectedTags={selectedTags} handleTagClick={handleTagClick} />
         <button onClick={() => handleTagClick("chocolate")}>Chocolat</button>
-<button onClick={() => handleTagClick("sugar")}>Sucre</button>
-<button onClick={() => handleTagClick("summer")}>Eté</button>
-<button onClick={() => handleTagClick("dessert")}>Dessert</button>
-<button onClick={() => handleTagClick("chocolate dessert")}>
-  dessert chocolat
-</button>
-<button onClick={() => handleTagClick("eggs free")}>Sans Oeufs</button>
-<button onClick={() => handleTagClick("autumn")}> Autumn</button>
-<button onClick={() => handleTagClick("vegan")}> Vegan</button>
+        <button onClick={() => handleTagClick("sugar")}>Sucre</button>
+        <button onClick={() => handleTagClick("summer")}>Eté</button>
+        <button onClick={() => handleTagClick("dessert")}>Dessert</button>
+        <button onClick={() => handleTagClick("chocolate dessert")}>
+          dessert chocolat
+        </button>
+        <button onClick={() => handleTagClick("eggs free")}>Sans Oeufs</button>
+        <button onClick={() => handleTagClick("autumn")}> Autumn</button>
+        <button onClick={() => handleTagClick("vegan")}> Vegan</button>
       </div>
       <Recipes recipes={filteredRecipes()} handleTagClick={handleTagClick} />
     </div>

@@ -3,10 +3,12 @@ import { TagType } from "../Tags/TagType";
 
 export const TagList = ({
   tags,
+  selectedTags,
   handleTagClick,
 }: {
   tags: TagType[];
-  handleTagClick: (tagId: string) => void;
+  selectedTags: string[];
+  handleTagClick: (tag: TagType | string) => void;
 }) => {
   return (
     <div
@@ -19,9 +21,13 @@ export const TagList = ({
         justifyContent: "center",
       }}
     >
-      {tags.map((obj) => (
-        // Pass the handleTagClick function to Tag component
-        <Tag key={obj.id} tag={obj} handleTagClick={handleTagClick} />
+      {tags.map((tag) => (
+        <Tag
+          key={tag.id}
+          tag={tag}
+          isSelected={selectedTags.includes(tag.id)}
+          handleTagClick={() => handleTagClick(tag.id)} // Pass the tagId directly as a string
+        />
       ))}
     </div>
   );
